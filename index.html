@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+  <title>Text-to-speech synthesis based on latent variable conversion using diffusion probabilistic model and variational autoencoder"</title>
+  <style>
+    .red {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <article>
+    <header>
+      <h1>Text-to-speech synthesis based on latent variable conversion using diffusion probabilistic model and variational autoencoder</h1>
+
+      <div>
+        <b>Yusuke Yasuda and Tomoki Toda (Nagoya university)</b><br>
+
+      </div>
+    </header>
+    <section>
+        <h2>English (LJSpeech corpus)</h2>
+        <div>
+          <table border="1">
+            <tr>
+              <th class="table-item">System</th>
+              <td class="table-item">Natural</td>
+              <td class="table-item">Diffusion (PGB0)</td>
+              <td class="table-item">Diffusion (DFPA)</td>
+              <td class="table-item">Diffusion (DFVAA)</td>
+              <td class="table-item">Diffusion (DFPAC)</td>
+              <td class="table-item">Diffusion (DFVAT)</td>
+            </tr>
+            <tr>
+              <th>Alignment</th>
+              <td></td>
+              <td class="table-item">GT</td>
+              <td class="table-item">Pred.</td>
+              <td class="table-item">GT (train & test)</td>
+              <td class="table-item">Pred.</td>
+              <td class="table-item">GT</td>
+            </tr>
+            <tr>
+              <th>Input</th>
+              <td></td>
+              <td class="table-item">P</td>
+              <td class="table-item">P</td>
+              <td class="table-item">P</td>
+              <td class="table-item">C</td>
+              <td class="table-item">P</td>
+            </tr>
+            <tr>
+              <th>Acoustic model</th>
+              <td></td>
+              <td class="table-item">Diffusion</td>
+              <td class="table-item">Diffusion</td>
+              <td class="table-item">Diffusion</td>
+              <td class="table-item">Diffusion</td>
+              <td class="table-item">MSE</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+                <audio controls>
+                  <source src="./wavs/ljspeech-natural-vits-testset/LJ001-0015.wav">
+                </audio>
+              </td>
+              <td>
+                <audio controls>
+                  <source src="./wavs/20220526-ljspeech-gradtts-freeze-glide-predx0-lr1e-4-decay0998-voc348k-posvariance-kl-92000/LJ001-0015.wav">
+                </audio>
+              </td>
+              <td>
+                <audio controls>
+                  <source src="./wavs/20220526-ljspeech-gradtts-freeze-glide-predx0-predalign-lr1e-4-decay0998-voc348k-posvariance-kl-170000/LJ001-0015.wav">
+                </audio>
+              </td>
+              <td>
+                <audio controls>
+                  <source src="./wavs/20220526-ljspeech-gradtts-freeze-glide-predx0-lr1e-4-decay0998-voc348k-posvariance-kl-92000-extattn/LJ001-0015.wav">
+                </audio>
+              </td>
+              <td>
+                <audio controls>
+                  <source src="./wavs/20220704-ljspeech-gradtts-freeze-glide-predx0-predalign-voc348k-posvariance-kl-character-115000/LJ001-0015.wav"></audio></td>
+              <td>
+                <audio controls>
+                  <source src="./wavs/20220627-ljspeech-transformer-tts-freeze-mse-198000/LJ001-0015.wav">
+                </audio>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+                <audio controls>
+                  <source src="./wavs/ljspeech-natural-vits-testset/LJ001-0051.wav">
+                </audio>
+              </td>
+              <td>
+                <audio controls>
+                  <source src="./wavs/20220526-ljspeech-gradtts-freeze-glide-predx0-lr1e-4-decay0998-voc348k-posvariance-kl-92000/LJ001-0051.wav">
+                </audio>
+              </td>
+              <td>
+                <audio controls>
+                  <source src="./wavs/20220526-ljspeech-gradtts-freeze-glide-predx0-predalign-lr1e-4-decay0998-voc348k-posvariance-kl-170000/LJ001-0051.wav">
+                </audio>
+              </td>
+              <td>
+                <audio controls>
+                  <source src="./wavs/20220526-ljspeech-gradtts-freeze-glide-predx0-lr1e-4-decay0998-voc348k-posvariance-kl-92000-extattn/LJ001-0051.wav">
+                </audio>
+              </td>
+              <td>
+                <audio controls>
+                  <source src="./wavs/20220704-ljspeech-gradtts-freeze-glide-predx0-predalign-voc348k-posvariance-kl-character-115000/LJ001-0051.wav"></audio></td>
+              <td>
+                <audio controls>
+                  <source src="./wavs/20220627-ljspeech-transformer-tts-freeze-mse-198000/LJ001-0051.wav">
+                </audio>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+                <audio controls>
+                  <source src="./wavs/ljspeech-natural-vits-testset/LJ001-0063.wav">
+                </audio>
+              </td>
+              <td>
+                <audio controls>
+                  <source src="./wavs/20220526-ljspeech-gradtts-freeze-glide-predx0-lr1e-4-decay0998-voc348k-posvariance-kl-92000/LJ001-0063.wav">
+                </audio>
+              </td>
+              <td>
+                <audio controls>
+                  <source src="./wavs/20220526-ljspeech-gradtts-freeze-glide-predx0-predalign-lr1e-4-decay0998-voc348k-posvariance-kl-170000/LJ001-0063.wav">
+                </audio>
+              </td>
+              <td>
+                <audio controls>
+                  <source src="./wavs/20220526-ljspeech-gradtts-freeze-glide-predx0-lr1e-4-decay0998-voc348k-posvariance-kl-92000-extattn/LJ001-0063.wav">
+                </audio>
+              </td>
+              <td>
+                <audio controls>
+                  <source src="./wavs/20220704-ljspeech-gradtts-freeze-glide-predx0-predalign-voc348k-posvariance-kl-character-115000/LJ001-0063.wav"></audio></td>
+              <td>
+                <audio controls>
+                  <source src="./wavs/20220627-ljspeech-transformer-tts-freeze-mse-198000/LJ001-0063.wav">
+                </audio>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+                <audio controls>
+                  <source src="./wavs/ljspeech-natural-vits-testset/LJ001-0072.wav">
+                </audio>
+              </td>
+              <td>
+                <audio controls>
+                  <source src="./wavs/20220526-ljspeech-gradtts-freeze-glide-predx0-lr1e-4-decay0998-voc348k-posvariance-kl-92000/LJ001-0072.wav">
+                </audio>
+              </td>
+              <td>
+                <audio controls>
+                  <source src="./wavs/20220526-ljspeech-gradtts-freeze-glide-predx0-predalign-lr1e-4-decay0998-voc348k-posvariance-kl-170000/LJ001-0072.wav">
+                </audio>
+              </td>
+              <td>
+                <audio controls>
+                  <source src="./wavs/20220526-ljspeech-gradtts-freeze-glide-predx0-lr1e-4-decay0998-voc348k-posvariance-kl-92000-extattn/LJ001-0072.wav">
+                </audio>
+              </td>
+              <td>
+                <audio controls>
+                  <source src="./wavs/20220704-ljspeech-gradtts-freeze-glide-predx0-predalign-voc348k-posvariance-kl-character-115000/LJ001-0072.wav"></audio></td>
+              <td>
+                <audio controls>
+                  <source src="./wavs/20220627-ljspeech-transformer-tts-freeze-mse-198000/LJ001-0072.wav">
+                </audio>
+              </td>
+
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+                <audio controls>
+                  <source src="./wavs/ljspeech-natural-vits-testset/LJ001-0079.wav">
+                </audio>
+              </td>
+              <td>
+                <audio controls>
+                  <source src="./wavs/20220526-ljspeech-gradtts-freeze-glide-predx0-lr1e-4-decay0998-voc348k-posvariance-kl-92000/LJ001-0079.wav">
+                </audio>
+              </td>
+              <td>
+                <audio controls>
+                  <source src="./wavs/20220526-ljspeech-gradtts-freeze-glide-predx0-predalign-lr1e-4-decay0998-voc348k-posvariance-kl-170000/LJ001-0079.wav">
+                </audio>
+              </td>
+              <td>
+                <audio controls>
+                  <source src="./wavs/20220526-ljspeech-gradtts-freeze-glide-predx0-lr1e-4-decay0998-voc348k-posvariance-kl-92000-extattn/LJ001-0079.wav">
+                </audio>
+              </td>
+              <td>
+                <audio controls>
+                  <source src="./wavs/20220704-ljspeech-gradtts-freeze-glide-predx0-predalign-voc348k-posvariance-kl-character-115000/LJ001-0079.wav"></audio></td>
+              <td>
+                <audio controls>
+                  <source src="./wavs/20220627-ljspeech-transformer-tts-freeze-mse-198000/LJ001-0079.wav">
+                </audio>
+              </td>
+            </tr>
+          </table>
+
+          <br>
+
+          <table border="1">
+              <tr>
+                <th class="table-item">System</th>
+                <td class="table-item">ABSD（HifiGAN for proposed method）</td>
+                <td class="table-item">ABSV（ABSD（HifiGAN for VITS）</td>
+                <td class="table-item">ABSG（ABSD（HifiGAN for Grad-TTS）</td>
+                <td class="table-item">VSPA (VITS)</td>
+                <td class="table-item">VSPAC (VITS)</td>
+                <td class="table-item">GTPA (Grad-TTS)</td>
+                <td class="table-item">GTPAC (Grad-TTS)</td>
+              </tr>
+              <tr>
+                <th>Alignment</th>
+                <td class="table-item">-</td>
+                <td class="table-item">-</td>
+                <td class="table-item">-</td>
+                <td class="table-item">Pred.</td>
+                <td class="table-item">Pred.</td>
+                <td class="table-item">Pred.</td>
+                <td class="table-item">Pred.</td>
+              </tr>
+              <tr>
+                <th>Input</th>
+                <td class="table-item">Mel</td>
+                <td class="table-item">Linear</td>
+                <td class="table-item">Mel</td>
+                <td class="table-item">Phoneme</td>
+                <td class="table-item">Character</td>
+                <td class="table-item">Phoneme</td>
+                <td class="table-item">Character</td>
+              </tr>
+              <tr>
+                <th>Acoustic model</th>
+                <td class="table-item">-</td>
+                <td class="table-item">-</td>
+                <td class="table-item">-</td>
+                <td class="table-item">Flow</td>
+                <td class="table-item">Flow</td>
+                <td class="table-item">Diffusion</td>
+                <td class="table-item">Diffusion</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td><audio controls>
+                    <source src="./wavs/20220525-ljspeech-vocoder-348000/LJ001-0015.wav"></audio></td>
+                <td><audio controls>
+                    <source src="./wavs/20220414-ljspeech-vits-vocoder-abs-275000/LJ001-0015.wav"></audio></td>
+                <td><audio controls>
+                    <source src="./wavs/20220707-mel-vocoder-102000/LJ001-0015.wav"></audio></td>
+                <td><audio controls>
+                    <source src="./wavs/20220414-ljspeech-vits-275000/LJ001-0015.wav"></audio></td>
+                <td><audio controls>
+                    <source src="./wavs/20220704-ljspeech-vits-character-scratch-origkl-67000/LJ001-0015.wav"></audio></td>
+                <td><audio controls>
+                    <source src="./wavs/20220704-gradtts-original-ganvoc-scratch-98000-voc102k/LJ001-0015.wav"></audio></td>
+                <td><audio controls>
+                    <source src="./wavs/20220706-ljspeech-gradtts-original-scratch-character-90000-voc102k/LJ001-0015.wav"></audio></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td><audio controls>
+                    <source src="./wavs/20220525-ljspeech-vocoder-348000/LJ001-0051.wav"></audio></td>
+                <td><audio controls>
+                    <source src="./wavs/20220414-ljspeech-vits-vocoder-abs-275000/LJ001-0051.wav"></audio></td>
+                <td><audio controls>
+                    <source src="./wavs/20220707-mel-vocoder-102000/LJ001-0051.wav"></audio></td>
+                <td><audio controls>
+                    <source src="./wavs/20220414-ljspeech-vits-275000/LJ001-0051.wav"></audio></td>
+                    <td><audio controls>
+                      <source src="./wavs/20220704-ljspeech-vits-character-scratch-origkl-67000/LJ001-0051.wav"></audio></td>
+                  <td><audio controls>
+                      <source src="./wavs/20220704-gradtts-original-ganvoc-scratch-98000-voc102k/LJ001-0051.wav"></audio></td>
+                  <td><audio controls>
+                      <source src="./wavs/20220706-ljspeech-gradtts-original-scratch-character-90000-voc102k/LJ001-0051.wav"></audio></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td><audio controls>
+                    <source src="./wavs/20220525-ljspeech-vocoder-348000/LJ001-0063.wav"></audio></td>
+                <td><audio controls>
+                    <source src="./wavs/20220414-ljspeech-vits-vocoder-abs-275000/LJ001-0063.wav"></audio></td>
+                <td><audio controls>
+                    <source src="./wavs/20220707-mel-vocoder-102000/LJ001-0063.wav"></audio></td>
+                <td><audio controls>
+                    <source src="./wavs/20220414-ljspeech-vits-275000/LJ001-0063.wav"></audio></td>
+                <td><audio controls>
+                    <source src="./wavs/20220704-ljspeech-vits-character-scratch-origkl-67000/LJ001-0063.wav"></audio></td>
+                <td><audio controls>
+                    <source src="./wavs/20220704-gradtts-original-ganvoc-scratch-98000-voc102k/LJ001-0063.wav"></audio></td>
+                <td><audio controls>
+                    <source src="./wavs/20220706-ljspeech-gradtts-original-scratch-character-90000-voc102k/LJ001-0063.wav"></audio></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td><audio controls>
+                    <source src="./wavs/20220525-ljspeech-vocoder-348000/LJ001-0072.wav"></audio></td>
+                <td><audio controls>
+                    <source src="./wavs/20220414-ljspeech-vits-vocoder-abs-275000/LJ001-0072.wav"></audio></td>
+                <td><audio controls>
+                    <source src="./wavs/20220707-mel-vocoder-102000/LJ001-0072.wav"></audio></td>
+                <td><audio controls>
+                    <source src="./wavs/20220414-ljspeech-vits-275000/LJ001-0072.wav"></audio></td>
+                <td><audio controls>
+                    <source src="./wavs/20220704-ljspeech-vits-character-scratch-origkl-67000/LJ001-0072.wav"></audio></td>
+                <td><audio controls>
+                    <source src="./wavs/20220704-gradtts-original-ganvoc-scratch-98000-voc102k/LJ001-0072.wav"></audio></td>
+                <td><audio controls>
+                    <source src="./wavs/20220706-ljspeech-gradtts-original-scratch-character-90000-voc102k/LJ001-0072.wav"></audio></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td><audio controls>
+                    <source src="./wavs/20220525-ljspeech-vocoder-348000/LJ001-0079.wav"></audio></td>
+                <td><audio controls>
+                    <source src="./wavs/20220414-ljspeech-vits-vocoder-abs-275000/LJ001-0079.wav"></audio></td>
+                <td><audio controls>
+                    <source src="./wavs/20220707-mel-vocoder-102000/LJ001-0079.wav"></audio></td>
+                <td><audio controls>
+                    <source src="./wavs/20220414-ljspeech-vits-275000/LJ001-0079.wav"></audio></td>
+                <td><audio controls>
+                    <source src="./wavs/20220704-ljspeech-vits-character-scratch-origkl-67000/LJ001-0079.wav"></audio></td>
+                <td><audio controls>
+                    <source src="./wavs/20220704-gradtts-original-ganvoc-scratch-98000-voc102k/LJ001-0079.wav"></audio></td>
+                <td><audio controls>
+                    <source src="./wavs/20220706-ljspeech-gradtts-original-scratch-character-90000-voc102k/LJ001-0079.wav"></audio></td>
+              </tr>
+          </table>
+        </div>
+      </section>
+    <footer>
+
+    </footer>
+  </article>
+</body>
+
+</html>
